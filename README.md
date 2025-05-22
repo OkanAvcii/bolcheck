@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BOLCheck: PDF ve Excel Konteyner Karşılaştırma Aracı
 
-## Getting Started
+BOLCheck, PDF dosyalarındaki konteyner bilgilerini Excel dosyasındaki verilerle karşılaştıran bir uygulamadır. Konteyner numaralarını, ağırlıkları ve mühür numaralarını karşılaştırarak, uyuşmazlıkları tespit eder.
 
-First, run the development server:
+## Özellikler
+
+- 📄 PDF dosyasından konteyner, ağırlık ve mühür bilgilerini otomatik çıkarma
+- 📊 Excel verileriyle otomatik karşılaştırma
+- ⚖️ Ağırlık farkı tolerans kontrolü
+- 🔍 VGM (Verified Gross Mass) ve brüt ağırlık karşılaştırması
+- 🔒 Farklı mühür formatı desteği (EU, ML, SL, CBMU)
+- 📱 Duyarlı ve modern kullanıcı arayüzü
+
+## Kurulum
 
 ```bash
+# Depoyu kopyalama
+git clone https://github.com/kullaniciadi/bolcheck.git
+cd bolcheck
+
+# Bağımlılıkları yükleme
+npm install
+
+# Geliştirme sunucusunu başlatma
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Kullanım
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Uygulamayı açın (varsayılan olarak http://localhost:3000)
+2. Karşılaştırmak istediğiniz PDF ve Excel dosyalarını seçin
+3. "Dosyaları Karşılaştır" butonuna tıklayın
+4. Sonuçları inceleyin - uyuşmazlıklar tabloda görüntülenecektir
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Excel Dosya Formatı
 
-## Learn More
+Excel dosyanızda aşağıdaki sütunlar olmalıdır:
+- "KONTEYNIR NO" veya "KONTEYNER NO" - Konteyner numaralarını içeren sütun
+- "TONAJ", "VGM", "BRÜT" veya "GROSS WEIGHT" - Ağırlık bilgilerini içeren sütun
+- "MÜHÜR NO" veya "SEAL NO" (isteğe bağlı) - Mühür numaralarını içeren sütun
 
-To learn more about Next.js, take a look at the following resources:
+### PDF Dosya Formatı
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+PDF dosyası aşağıdaki bilgileri metin formatında içermelidir:
+- Konteyner numaraları (4 harf + 7 rakam formatında, örn: TRHU1563728)
+- Ağırlık bilgileri (27,920.000 kgs, 27.920 MT gibi formatlar)
+- Mühür numaraları (EU29324275, ML123456, SL123456, CBMU1234567 gibi formatlar)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Desteklenen Formatlar
 
-## Deploy on Vercel
+### Ağırlık Formatları
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `27,920.000 kgs`
+- `27.920 MT`
+- `27920 kg`
+- `VGM: 27.920 kg`
+- `Gross Weight: 27920 kgs`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Mühür Formatları
+
+- `EU` formatı: EU12345678
+- `ML` formatı: ML123456
+- `SL` formatı: SL123456
+- `CBMU` formatı: CBMU1234567
+
+## Teknik Detaylar
+
+- Next.js 14 ile geliştirilmiştir (App Router)
+- React ve TypeScript kullanılmıştır
+- Sunucu tarafında PDF dosya işleme için pdf-parse
+- Excel dosya işleme için xlsx
+- Modern UI bileşenleri için shadcn/ui ve Tailwind CSS
+
+## Lisans
+
+MIT
